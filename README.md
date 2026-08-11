@@ -13,8 +13,9 @@ To deploy your output to GitHub pages, run `pretext deploy`.
 
 To compile a pdf, run `pretext build print`.
 
-The main purpose is for building SCORM packages from various DOENet samples. run `pretext build scorm`
+The main purpose is for building SCORM packages from various DOENet samples. run `pretext build <package name>`.  All package names are located in `source/project.ptx`
 
+It is a good idea to periodically run an update on PreText
 ---
 
 Below you will find some advice for working with PreTeXt, including help with using the [PreTeXt Codespace](https://github.com/PreTeXtBook/pretext-codespace) online editor through GitHub if you don't want to install the required software on your own computer.
