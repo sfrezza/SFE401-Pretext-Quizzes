@@ -11,6 +11,7 @@
     <target name="Activity1-SCORM" standalone="yes" source="activity1.ptx" format="html" compression="scorm" output-dir="scorms"/>
     <target name="HelloWorld-SCORM" standalone="yes" source="HelloWorldAssignment.ptx" format="html" compression="scorm" output-dir="scorms"/>
     <target name="LonghandBinary-SCORM" standalone="yes" source="LonghandBinary.ptx" format="html" compression="scorm" output-dir="scorms"/>
+    <target name="DC-Mesh-Prelab-SCORM" standalone="yes" source="DCMeshPrelabQuiz.ptx" format="html" compression="scorm" output-dir="scorms"/>
   </targets>
 </project>
 
