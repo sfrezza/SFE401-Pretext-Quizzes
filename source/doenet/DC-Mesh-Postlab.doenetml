@@ -1,0 +1,656 @@
+
+<setup>
+<module name="drawVertResistor">
+  <moduleAttributes> <!-- defining inputs -->
+    <number name="radius">1</number>
+    <number name="resistance">100</number>
+    <point name="posLocation">(0, 0 + 2 *$radius)</point> <!-- above negLocation... -->
+    <point name="negLocation">(0, 0 - 2 *$radius)</point>
+    <text name="units">Ω</text>
+    <text name="label">Rn</text>
+  </moduleAttributes>
+
+<!-- internal variables -->
+  <setup>
+    <number name="XGap">$radius/2</number>
+    <number name="YGap">$radius/4</number>
+    <number name="SymbolStartDrawX">$center.x</number>
+    <number name="SymbolStartDrawY">$center.y + $radius</number>
+
+    <point name="center">($posLocation.x, $negLocation.y +
+       ($posLocation.y - $negLocation.y)/2)</point>
+    <point name="UnitsLabel"> 
+      ($center.x - .75 * $radius, $center.y) </point>
+    <point name="LabelLoc"> 
+      ($center.x + .75 * $radius, $center.y) </point>
+    <pointList name="symbolPoints">
+      <point>($SymbolStartDrawX, $SymbolStartDrawY)</point>
+      <point>($SymbolStartDrawX + $XGap, $SymbolStartDrawY - $YGap/2)</point>
+      <point>($SymbolStartDrawX - $XGap, $SymbolStartDrawY - 1.5*$YGap)</point>
+      <point>($SymbolStartDrawX + $XGap, $SymbolStartDrawY - 2.5*$YGap)</point>
+      <point>($SymbolStartDrawX - $XGap, $SymbolStartDrawY - 3.5*$YGap)</point>
+      <point>($SymbolStartDrawX + $XGap, $SymbolStartDrawY - 4.5*$YGap)</point>
+      <point>($SymbolStartDrawX - $XGap, $SymbolStartDrawY - 5.5*$YGap)</point>
+      <point>($SymbolStartDrawX + $XGap, $SymbolStartDrawY - 6.5*$YGap)</point>
+      <point>($SymbolStartDrawX - $XGap, $SymbolStartDrawY - 7.5*$YGap)</point>
+      <point>($SymbolStartDrawX, $SymbolStartDrawY - 8*$YGap)</point>
+    </pointList>
+<!--      
+    </case>
+  </conditionalContent>
+      -->
+</setup>
+
+  <label anchor="$UnitsLabel" positionFromAnchor="left">
+    $resistance $units</label>
+  <label anchor="$LabelLoc" positionFromAnchor="upperRight">
+    $label</label>
+<!-- Connector -->
+  $posLocation 
+  <lineSegment 
+    endpoints="($SymbolStartDrawX, $center.y - $radius) $negLocation" 
+    styleNumber="4" />
+
+  <!-- Resistor Symbol Strokes: -->
+  <lineSegment 
+    endpoints="$posLocation $symbolPoints[1]" styleNumber="4" />
+  <lineSegment 
+    endpoints="$symbolPoints[1] $symbolPoints[2]" styleNumber="4" />
+  <lineSegment 
+    endpoints="$symbolPoints[2] $symbolPoints[3]" styleNumber="4" />
+  <lineSegment 
+    endpoints="$symbolPoints[3] $symbolPoints[4]" styleNumber="4" />
+  <lineSegment 
+    endpoints="$symbolPoints[4] $symbolPoints[5]" styleNumber="4" />
+    <lineSegment 
+    endpoints="$symbolPoints[5] $symbolPoints[6]" styleNumber="4" />
+    <lineSegment 
+    endpoints="$symbolPoints[6] $symbolPoints[7]" styleNumber="4" />
+    <lineSegment 
+    endpoints="$symbolPoints[7] $symbolPoints[8]" styleNumber="4" />
+    <lineSegment 
+    endpoints="$symbolPoints[8] $symbolPoints[9]" styleNumber="4" />
+    <lineSegment 
+    endpoints="$symbolPoints[9] $symbolPoints[10]" styleNumber="4" />
+
+  <!-- Broken - not sure why
+      <repeatForSequence 
+        from="1"  to="9"  step="1"  valueName="i">
+        <lineSegment 
+          endpoints="$SymbolPoints[$i] $symbolPoints[$i + 1]"
+          styleNumber="4" />
+      </repeatForSequence>
+-->
+  <!-- Connector -->
+  <lineSegment endpoints="$negLocation $symbolPoints[10]" 
+    styleNumber="4" />
+  $negLocation 
+</module>
+</setup>
+
+<setup>
+<module name="drawHorizResistor">
+  <moduleAttributes> <!-- defining inputs -->
+    <number name="radius">1</number>
+    <number name="resistance">1000</number>
+    <point name="rightLocation">(0 + 2 *$radius, 0)</point>
+    <point name="leftLocation">(0 - 2 *$radius, 0)</point>
+    <text name="units">Ω</text>
+    <text name="label">Rm</text>
+  </moduleAttributes>
+<!-- internal variables -->
+  <setup>
+    <number name="YGap">$radius/2</number>
+    <number name="XGap">$radius/4</number>
+    <number name="SymbolStartDrawX">$center.x - $radius</number>
+    <number name="SymbolStartDrawY">$center.y</number>
+
+    <point name="center">( $rightLocation.x - ($rightLocation.x - $leftLocation.x)/2, $rightLocation.y)</point>
+    <point name="UnitsLabel"> ($center.x, $center.y - $radius) </point>
+    <point name="LabelLoc"> ($center.x, $center.y + $radius) </point>
+    <pointList name="symbolPoints">
+      <point>($SymbolStartDrawX, $SymbolStartDrawY)</point>
+      <point>($SymbolStartDrawX + $XGap / 2, $SymbolStartDrawY + $YGap)</point>
+      <point>($SymbolStartDrawX + 1.5*$XGap, $SymbolStartDrawY - $YGap)</point>
+      <point>($SymbolStartDrawX + 2.5*$XGap, $SymbolStartDrawY + $YGap)</point>
+      <point>($SymbolStartDrawX + 3.5*$XGap, $SymbolStartDrawY - $YGap)</point>
+      <point>($SymbolStartDrawX + 4.5*$XGap, $SymbolStartDrawY + $YGap)</point>
+      <point>($SymbolStartDrawX + 5.5*$XGap, $SymbolStartDrawY - $YGap)</point>
+      <point>($SymbolStartDrawX + 6.5*$XGap, $SymbolStartDrawY + $YGap)</point>
+      <point>($SymbolStartDrawX + 7.5*$XGap, $SymbolStartDrawY - $YGap)</point>
+      <point>($SymbolStartDrawX + 8 * $XGap, $SymbolStartDrawY)</point>
+    </pointList>
+</setup>
+  <label anchor="$UnitsLabel" positionFromAnchor="center">
+      $resistance $units</label>
+  <label anchor="$LabelLoc" positionFromAnchor="center">
+      $label</label>
+<!-- Connector -->
+  <lineSegment 
+    endpoints="$leftLocation $symbolPoints[1]" styleNumber="4" />
+<!-- Resistor Symbol Strokes: -->
+  <lineSegment 
+    endpoints="$symbolPoints[1] $symbolPoints[2]" styleNumber="4" />
+  <lineSegment 
+    endpoints="$symbolPoints[2] $symbolPoints[3]" styleNumber="4" />
+  <lineSegment 
+    endpoints="$symbolPoints[3] $symbolPoints[4]" styleNumber="4" />
+  <lineSegment 
+    endpoints="$symbolPoints[4] $symbolPoints[5]" styleNumber="4" />
+    <lineSegment 
+    endpoints="$symbolPoints[5] $symbolPoints[6]" styleNumber="4" />
+    <lineSegment 
+    endpoints="$symbolPoints[6] $symbolPoints[7]" styleNumber="4" />
+    <lineSegment 
+    endpoints="$symbolPoints[7] $symbolPoints[8]" styleNumber="4" />
+    <lineSegment 
+    endpoints="$symbolPoints[8] $symbolPoints[9]" styleNumber="4" />
+
+    <lineSegment 
+    endpoints="$symbolPoints[9] $symbolPoints[10]" styleNumber="4" />
+
+  <!-- Connector -->
+  <lineSegment endpoints="$rightLocation $symbolPoints[10]" 
+    styleNumber="4" />
+ 
+</module>
+</setup>
+
+<setup>
+<module name="drawVertVoltageSource">
+  <moduleAttributes> <!-- defining inputs -->
+    <number name="radius">.75</number>
+    <number name="voltage">100</number>
+    <point name="posLocation">(0, 0 + 2 *$radius)</point> <!-- above negLocation... -->
+    <point name="negLocation">(0, 0 - 2 *$radius)</point>
+    <text name="units">V</text>
+    <text name="label">Vn</text>
+  </moduleAttributes>
+
+<setup>
+<!-- internal variables -->
+     <point name="center">($negLocation.x, $negLocation.y +($posLocation.y - $negLocation.y)/2)</point>
+    <point name="VoltsLabel"> ($center.x - .75 * $radius, $center.y) </point>
+    <point name="LabelLoc"> ($center.x + .75 * $radius, $center.y) </point>
+    <point name="PlusLabel"> ($center.x, $center.y + $radius/2) </point>
+    <point name="NegLabel"> ($center.x, $center.y - $radius/2) </point>
+</setup>
+
+  <label anchor="$VoltsLabel" positionFromAnchor="left">
+    $voltage $units</label>
+  <label anchor="$LabelLoc" positionFromAnchor="upperRight">$label</label>
+  <label anchor="$PlusLabel" positionFromAnchor="center">
+      <m>+</m></label>
+  <label anchor="$NegLabel" positionFromAnchor="center">
+      <m>-</m></label>
+  
+  <lineSegment 
+    endpoints="($center.x, $center.y - $radius) $negLocation" 
+    styleNumber="4"
+  />
+  <lineSegment 
+    endpoints="($center.x, $center.y + $radius) $posLocation" 
+    styleNumber="4"
+  />
+  <circle 
+    center="$center"
+    radius="$radius" 
+    draggable="false" 
+    styleNumber="5">
+  </circle>
+</module>
+</setup>
+
+<setup> 
+<p><numberList name="ResistorValuesWZero">
+  0 100 200 220 270 330 0 390 470 560 680 820 0 1000 2000 2200 2700 3300  0 3900 4700 0 5600 6800 0 8200
+</numberList></p>
+<p><numberList name="ResistorValuesWOZero">
+  100 200 220 270 330 390 470 560 680 820 1000 2000 2200 2700 3300 3900 4700 5600 6800 8200
+</numberList></p>
+
+  <number name="Req1">$ResistorValuesWZero[$R1index]</number>
+  <number name="Req2">$ResistorValuesWZero[$R2index]</number>
+  <number name="Req3">$ResistorValuesWZero[$R3index]</number>
+  <number name="Req4">$ResistorValuesWOZero[$R4index]</number>
+  <number name="Req5">$ResistorValuesWOZero[$R5index]</number>
+
+  
+  <!-- Key circuit variables used in the component displays & computations: -->
+  <p><sampleRandomNumbers name="R1index" from="1" to="$ResistorValuesWZero.numValues" step="1" type="discreteUniform"/></p>
+  <p><sampleRandomNumbers name="R2index" from="1" to="$ResistorValuesWZero.numValues" step="1" type="discreteUniform"/></p>
+    <p><sampleRandomNumbers name="R3index" from="1" to="$ResistorValuesWZero.numValues/3" step="1" type="discreteUniform"/></p>
+    <p><sampleRandomNumbers name="R4index" from="1" to="$ResistorValuesWOZero.numValues/3" step="1" type="discreteUniform"/></p>
+    <p><sampleRandomNumbers name="R5index" from="1" to="$ResistorValuesWOZero.numValues/2" step="1" type="discreteUniform"/></p>
+
+  <number name="maxNumMC1Attempts">1</number>
+  <number name="maxNumMC2Attempts">1</number>
+</setup>
+
+
+<!-- Begin use of the elements to display a circuit with variable values -->
+  <section boxed>
+    <title>Determine the Equivalent Resistance <m>R_{eq}</m></title>
+  <graph 
+    displayXAxis="false" 
+    displayYAxis="false" >
+<!--    yMin="-4" yMax="10" xMin="-12" xMax="12" > -->
+
+    <conditionalContent>
+      <case condition="$Req1=0">
+        <lineSegment endpoints="$n4 $n5" styleNumber="4"/>
+      </case>
+      <else>
+        <module copy="$drawHorizResistor"
+          resistance="$Req1" label="R1"
+       leftLocation = "$n4" rightLocation = "$n5" />
+      </else>
+      </conditionalContent>
+    
+    <conditionalContent>
+      <case condition="$Req2=0">
+        <lineSegment endpoints="$n5 $n6" styleNumber="4"/>
+      </case>
+      <else>
+        <module copy="$drawHorizResistor"
+          resistance="$Req2" label="R2"
+          leftLocation = "$n5" rightLocation = "$n6" 
+        />
+        </else>
+    </conditionalContent>
+
+    <conditionalContent>
+      <case condition="$Req3=0">
+        <lineSegment endpoints="$n2 $n3" styleNumber="4"/>
+      </case>
+      <else>
+        <module copy="$drawHorizResistor"
+          resistance="$Req3" label="R3"
+          leftLocation = "$n2" rightLocation = "$n3" 
+        />      
+      </else>
+    </conditionalContent>
+    
+    <module copy="$drawVertResistor"
+    resistance="$Req4" label="R4"
+    negLocation = "$n2" posLocation = "$n5" 
+    />
+
+    <module copy="$drawVertResistor"
+      resistance="$Req5" label="R5"
+      negLocation = "$n3" posLocation = "$n6" 
+      />
+    
+    <!-- Defining the network -->
+    <point name="n4">(-9,2)<label>A</label></point>
+    <point name="n1">(-9,-7)<label>B</label></point>
+    <point name="n2">(-3,-7)</point>
+    <point name="n3">(4,-7)</point>
+    <point name="n5">(-3,2)</point>
+    <point name="n6">(4,2)</point>
+    
+    <point name="n7">(9,2)<label>C</label></point>
+    <point name="n8">(9,-7) <label>D</label></point>
+    <lineSegment endpoints="$n1 $n2" styleNumber="4"/>
+
+    <lineSegment endpoints="$n3 $n8" styleNumber="4"/>
+    <lineSegment endpoints="$n6 $n7" styleNumber="4"/>
+  
+    
+    <shortDescription>A circuit with 4-6 resistors</shortDescription>
+</graph>
+ 
+<setup>
+    <number name="R235">$Req2+$Req3+$Req5</number>
+    <number name="ReqAB">$Req1 + ($Req4 * $R235)/($Req4 + $R235)</number> 
+  
+<!-- Answer population -->
+    <!-- $ReqAB will be rounded when convereted to an integer: -->
+    <integer name="GoodAnswer1">$ReqAB</integer>
+    <integer name="BadAnswer1">$ReqAB + $Req4</integer>
+    <integer name="BadAnswer2">
+      <conditionalContent> 
+        <case condition="$ReqAB=($Req1 + $Req4 + $Req5)">
+          <integer>$Req1 + $Req4</integer></case>
+        <case condition="$BadAnswer1=($Req1 + $Req4 + $Req5)">
+          <integer>$Req1 + $Req4</integer></case>
+        <case condition="$GoodAnswer1 > 2.1*$GoodAnswer2">$GoodAnswer2 * 2</case>
+        <else><integer>$GoodAnswer2</integer></else>
+      </conditionalContent>
+    </integer>
+    <integer name="BadAnswer3">
+          <conditionalContent>
+            <case condition="($Req1+$Req2+$Req3)=$GoodAnswer1">
+              <selectFromSequence from="$Req1" to="$Req1 + $Req2 +$Req3 + $Req4" exclude="$GoodAnswer1"></selectFromSequence></case>
+            <case condition="($Req1+$Req2+$Req3)=$BadAnswer1">
+              <selectFromSequence from="$GoodAnswer1+1" to="$Req1 + $Req2 +$Req3 + $Req4" exclude="$BadAnswer1"></selectFromSequence></case>
+            <case condition="($Req1+$Req2+$Req3)=$BadAnswer2"> 
+              <selectFromSequence from="$Req1" to="$GoodAnswer1-1" exclude="$BadAnswer2"></selectFromSequence></case>
+            <else>$Req1 + $Req2 +$Req3</else>
+          </conditionalContent>
+    </integer>
+</setup>
+
+    <!-- Question1 in FE Exam Format: -->
+    <answer name="MCresponse1" maxNumAttempts="$maxNumMC1Attempts">
+      <choiceInput shuffleOrder>
+        <label>The equivalent resistor at terminals A-B is most nearly:</label>
+        <shortDescription>Ordered list of four responses for the equivalent resistance A-B question.</shortDescription>
+        <choice>$BadAnswer1 Ω</choice>
+        <choice>$BadAnswer2 Ω</choice>
+        <choice credit="1"> $GoodAnswer1 Ω</choice>
+        <choice>$BadAnswer3 Ω</choice>
+      </choiceInput>
+    </answer>
+
+<!-- For debugging answers to Q1: <p>$ReqAB</p> -->
+<setup>
+   <number name="R234">$Req2+$Req3+$Req4</number>
+    <p><number name="ReqCD">($Req5*$R234)/($Req5 + $R234)</number></p>
+</setup>
+
+    <setup>
+    $GoodAnswer1
+    [<integer name="GoodAnswer2"><floor>$ReqCD</floor></integer>]
+    <integer name="BadAnswer4">
+      <conditionalContent>
+        <case condition="($Req1≤0) and ($R2≤0)">$Req3+$Req4+$Req5</case>
+        <case condition="($Req1≤0)">$R235</case>
+        <else><floor>.8 * $GoodAnswer2 </floor></else>
+      </conditionalContent></integer>
+    <integer name="BadAnswer5">
+      <conditionalContent>
+        <case condition="$Req1>0">(($Req1 * $Req4)/($Req1 + $Req4)) + $Req2 + $Req3</case>
+        <else>$GoodAnswer1</else>
+      </conditionalContent></integer>
+    <integer name="BadAnswer6">
+      <conditionalContent>
+        <case condition="$Req3≤0">($Req5*$Req2)/($Req5+$Req2) + 15</case>
+        <case condition="$GoodAnswer1 ≥ 3.1*$GoodAnswer2">($GoodAnswer1/3+15)</case>
+        <case condition="$GoodAnswer1 ≥ 2.2*$GoodAnswer2">$GoodAnswer1/2</case>
+        <else>$GoodAnswer1 </else>
+      </conditionalContent>
+    </integer>
+</setup>
+    
+    <!-- Question2 in FE Exam Format: -->
+    <answer name="MCresponse2" maxNumAttempts="$maxNumMC2Attempts">
+      <choiceInput shuffleOrder>
+        <label>The equivalent resistor at terminals C-D is most nearly:</label>
+        <shortDescription>Ordered list of four responses for the equivalent resistance C-D question.</shortDescription>
+        <choice>$BadAnswer4 Ω</choice>
+        <choice>$BadAnswer5 Ω</choice>
+        <choice credit="1"> $GoodAnswer2 Ω</choice>
+        <choice>$BadAnswer6 Ω</choice>
+      </choiceInput>
+    </answer>
+    
+      </section>
+
+<section boxed>
+  <title>Superposition and Power Computation</title>
+
+<setup>
+<module name="drawVertVoltageSource">
+  <moduleAttributes> <!-- defining inputs -->
+    <number name="radius">.75</number>
+    <number name="voltage">100</number>
+    <point name="posLocation">(0, 0 + 2 *$radius)</point>
+    <point name="negLocation">(0, 0 - 2 *$radius)</point>
+    <text name="units">V</text>
+    <text name="label">Vn</text>
+    
+  </moduleAttributes>
+
+<setup>
+<!-- internal variables -->
+     <point name="center">($negLocation.x, ($posLocation.y - abs($negLocation.y))/2)</point>
+    <point name="VoltsLabel"> ($center.x - $radius, $center.y) </point>
+    <point name="LabelLoc"> ($center.x + $radius, $center.y) </point>
+    <point name="PlusLabel"> ($center.x, $center.y + $radius/2) </point>
+    <point name="NegLabel"> ($center.x, $center.y - $radius/2) </point>
+</setup>
+
+  <label anchor="$VoltsLabel" positionFromAnchor="left">
+    $voltage $units</label>
+  <label anchor="$LabelLoc" positionFromAnchor="right">$label</label>
+  <label anchor="$PlusLabel" positionFromAnchor="center">
+      <m>+</m></label>
+  <label anchor="$NegLabel" positionFromAnchor="center">
+      <m>-</m></label>
+  
+  <lineSegment 
+    endpoints="($center.x, $center.y - $radius) $negLocation" 
+    styleNumber="4"
+  />
+  <lineSegment 
+    endpoints="($center.x, $center.y + $radius) $posLocation" 
+    styleNumber="4"
+  />
+  <circle 
+    center="$center"
+    radius="$radius" 
+    draggable="false" 
+    styleNumber="5">
+  </circle>
+</module>
+</setup>
+
+
+<setup> 
+  <p><sampleRandomNumbers name="R1" from="60" to="300" step="10" type="discreteUniform"/></p>
+  <p><sampleRandomNumbers name="R2" from="200" to="1000" step="10" type="discreteUniform"/></p>
+    <p><sampleRandomNumbers name="R3" from="100" to="500" step="10" type="discreteUniform"/></p>
+    <p><sampleRandomNumbers name="V1" from="40" to="120" step="10" type="discreteUniform"/></p>
+    <p><sampleRandomNumbers name="V2" from="20" to="80" step="10" type="discreteUniform" exclude="$V1"/></p>
+  <!--
+    <number name="R1">90</number>
+    <number name="R2">830</number>
+    <number name="R3">150</number>
+    <number name="V1">100</number>
+    <number name="V2">60</number>
+  -->
+</setup>
+
+
+<!-- Begin use of the elements to display a circuit with variable values -->
+  <section boxed>
+    <title>Compute DC Power</title>
+    
+  <graph 
+    displayXAxis="false" 
+    displayYAxis="false" >
+    
+    <module copy="$drawVertResistor"
+    resistance="$R3" label="R3"
+    negLocation = "$n3" posLocation = "$n6" 
+    />
+
+    <module copy="$drawHorizResistor"
+    resistance="$R2" label="R2"
+    leftLocation = "$n5" rightLocation = "$n6" 
+    />
+
+    <module copy="$drawHorizResistor"
+    resistance="$R1" label="R1"
+    leftLocation = "$n4" rightLocation = "$n5" 
+    />
+
+    <module copy="$drawVertVoltageSource"
+      voltage="$V1" label="V1"
+      negLocation = "$n1" posLocation = "$n4" 
+      />
+
+    <module copy="$drawVertVoltageSource"
+      voltage="$V2" label="V2"
+      negLocation = "$n2" posLocation = "$n5" 
+      />
+    
+    <point name="n1">(-8,-6)</point> <point name="n4">(-8,0)</point>
+    <point name="n2">(0,-6)</point>  <point name="n5">(0,0)</point>
+    <point name="n3">(8,-6)</point>  <point name="n6">(8,0)</point>
+    <lineSegment endpoints="$n1 $n2" styleNumber="4"/>
+    <lineSegment endpoints="$n2 $n3" styleNumber="4"/>
+    
+    <shortDescription>A DC circuit with 2 voltage sources and three resistors</shortDescription>
+</graph>
+    
+ 
+<!-- Questions in FE Exam Format: -->
+<setup>
+    <integer name="maxNumPow1Attempts">1</integer>
+    <integer name="maxNumPow2Attempts">1</integer>
+  
+    <boolean name="Q1UnitsinW"> ($GoodAnswer1 > 1)</boolean> 
+<p> <number name="GoodAnswer1">(($V2 - $V1)^2)/$R1</number>
+    <number name="BadAnswer1q1">$GoodAnswer1*2</number>
+    <number name="BadAnswer2q1">(($V2 - $V1)^2)/$R2</number>
+    <number name="BadAnswer3q1">(($V2 - $V1)^2)/$R3</number></p>
+
+    <number name="CorrectI2">($V2)/($R2+$R3)</number>
+  
+    <boolean name="Q2UnitsinW"> ($GoodAnswer2 > 1)</boolean> 
+ <p><number name="GoodAnswer2">(($CorrectI2)^2)*$R3</number>
+    <number name="BadAnswer1q2">$GoodAnswer2*2</number>
+    <number name="BadAnswer2q2">(($CorrectI2)^2)*$R2</number>
+    <number name="BadAnswer3q2">(($CorrectI2)^2)*$R1</number></p>
+</setup>
+    
+    <answer name="MCresponse1" maxNumAttempts="$maxNumPow1Attempts">
+      <choiceInput shuffleOrder>
+        <label>The power dissipated in the $R1 Ω (R1) resistor is most nearly:</label>
+        <shortDescription>Ordered list of four responses for the power dissipation question.</shortDescription>
+        <conditionalContent> 
+          <case condition="$Q1UnitsinW">
+        <choice>$BadAnswer1q1 W</choice>
+        <choice>$BadAnswer2q1 W</choice>
+        <choice credit="1"> $GoodAnswer1 W</choice>
+        <choice>$BadAnswer3q1 W</choice>
+          </case>
+          <else>
+        <choice><number displayDecimals="0">$BadAnswer1q1 * 1000</number> mW</choice>
+        <choice><number displayDecimals="0">$BadAnswer2q1*1000</number> mW</choice>
+        <choice credit="1"> <number displayDecimals="0">$GoodAnswer1 *1000</number> mW</choice>
+        <choice><number displayDecimals="0">$BadAnswer3q1*1000</number> mW</choice>
+          </else>
+        </conditionalContent>
+      </choiceInput>
+    </answer>
+
+ <answer name="MCresponse2" maxNumAttempts="$maxNumPow2Attempts">
+      <choiceInput shuffleOrder>
+        <label>The power dissipated in the $R3 Ω (R3) resistor is most nearly:</label>
+        <shortDescription>Ordered list of four responses for the power dissipation question.</shortDescription>
+          <conditionalContent> 
+            <case condition="$Q2UnitsinW">
+        <choice>$BadAnswer1q2 W</choice>
+        <choice>$BadAnswer2q2 W</choice>
+        <choice credit="1"> $GoodAnswer2 W</choice>
+        <choice>$BadAnswer3q2 W</choice>
+            </case>
+            <else>
+        <choice><number displayDecimals="0">$BadAnswer1q2*1000</number> mW</choice>
+        <choice><number displayDecimals="0">$BadAnswer2q2*1000</number> mW</choice>
+        <choice credit="1"> <number displayDecimals="0">$GoodAnswer2*1000</number> mW</choice>
+        <choice><number displayDecimals="0">$BadAnswer3q2*1000</number> mW</choice>
+            </else>
+            </conditionalContent>
+      </choiceInput>
+    </answer>
+    
+<!--    
+    <p><triggerSet>
+      <callAction actionName="resample" target="$R1"/>
+            <callAction actionName="resample" target="$R2"/>
+            <callAction actionName="resample" target="$R3"/>
+            <callAction actionName="resample" target="$V1"/>
+            <callAction actionName="resample" target="$V2"/>
+         <updateValue target="$P1" type="math" newValue=""/>
+         <updateValue target="$I1" type="math" newValue=""/>
+         <updateValue target="$I2" type="math" newValue=""/>
+      <label>Try New Values</label>
+    </triggerSet></p>
+    -->
+      </section>
+
+
+  
+  <section boxed>
+<title>Part Selection</title>
+<setup>
+  <integer name="maxNumWattageMCAttempts">1</integer>
+  <numberList name="WattageRatings">1/8 1/4 1/2 1 2 5 10 25 50 100 150 200</numberList> 
+
+    <!-- Displayed for Debugging -->
+    <p>Power Needed: $PowerDissipated w rating index [ 
+    <integer name="WattageRatingIndexNeeded">
+      <conditionalContent>
+        <case condition="$PowerDissipated < ($WattageRatings[1]/2)">1</case>
+        <case condition="$PowerDissipated < $WattageRatings[1]">2</case>
+        <case condition="$PowerDissipated < $WattageRatings[2]">3</case>
+        <case condition="$PowerDissipated < $WattageRatings[3]">4</case>
+        <case condition="$PowerDissipated < $WattageRatings[4]">5</case>
+        <case condition="$PowerDissipated < $WattageRatings[5]">6</case>
+        <case condition="$PowerDissipated < $WattageRatings[6]">7</case>
+        <case condition="$PowerDissipated < $WattageRatings[7]">8</case>
+        <case condition="$PowerDissipated < $WattageRatings[8]">9</case>
+        <case condition="$PowerDissipated < $WattageRatings[9]">10</case>
+        <else> 11 </else>
+      </conditionalContent>
+    </integer> ] or $WattageRatings[$WattageRatingIndexNeeded]W</p>
+    <!-- Wattage rating selected should be ≥ 2x $PowerDissipated ≤ 4x $PowerDissipated. -->
+  </setup>
+
+<setup>
+    <number name="GoodWattageAnswer">$WattageRatings[$WattageRatingIndexNeeded]</number>
+    <number name="BadWattageAnswer1">
+      <conditionalContent> <!-- This fails randomly as "Found duplicate componentldx 624" -->
+        <case condition="$WattageRatingIndexNeeded ≥ 2"> 
+          $WattageRatings[$WattageRatingIndexNeeded - 1] </case>
+        <else>$WattageRatings[$WattageRatingIndexNeeded + 3] </else>
+      </conditionalContent> </number>
+      <number name="BadWattageAnswer2"> $WattageRatings[$WattageRatingIndexNeeded+1]</number>
+      <number name="BadWattageAnswer3">
+        <conditionalContent>
+          <case condition="$WattageRatingIndexNeeded ≥ 4">$WattageRatings[$WattageRatingIndexNeeded+2]</case>
+          <else>$WattageRatings[$WattageRatingIndexNeeded+2]</else>
+        </conditionalContent>
+        
+      </number> 
+</setup>
+      
+    <answer name="MCresponse" maxNumAttempts="$maxNumWattageMCAttempts">
+      <choiceInput name="MCchoice" shuffleOrder>
+        <label>The recommended wattage rating for the $ResistorList[$ResistorSelected] Ω (R$ResistorSelected) resistor is:</label>
+        <shortDescription>Ordered list of four responses for the equivalent resistance question.</shortDescription>
+        <choice>$BadWattageAnswer2 W</choice>
+        <choice credit="1"> $GoodWattageAnswer W</choice>
+        <choice>$BadWattageAnswer1 W</choice>
+        <choice>$BadWattageAnswer3 W</choice>
+      </choiceInput>
+    </answer>
+    
+    <!--
+   <p>The current flowing in the $ResistorList[$ResistorSelected] Ω (R$ResistorSelected) resistor is: 
+      <mathInput name="I5"> <shortDescription>Current in R$ResistorSelected</shortDescription></mathInput> mA
+    <answer allowedErrorInNumbers="0.05">
+    <award><when>
+        $I5 = $CurrentList[$ResistorSelected] * 1000
+      </when></award>
+  </answer></p>
+    -->
+    
+<setup>
+
+  <numberList name="ResistorList">$R1 $R2</numberList>
+  <numberList name="CurrentList">(($V2 - $V1)/$R1) ($V2/($R2 + $R3)) ($V2/($R2 + $R3)) </numberList>
+<integer name="ResistorSelected">2</integer>
+  
+    <p>[$ResistorSelected]: ($ResistorList[$ResistorSelected])Ω </p>
+    
+  <p>   <number name="PowerDissipated">($CurrentList[$ResistorSelected])^2*$ResistorList[$ResistorSelected]</number>W
+  </p>
+      </setup>    
+    
+  </section>
+</section>

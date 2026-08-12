@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- to build: pretext build HelloWorld-SCORM where this tag is identified in the "project.ptx" file -->
+<pretext>
+    <article xml:id="blah" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <title>DC Power Computation</title>
+      <p>Please be patient while the postlab quiz on DC Power computation is generated.  
+            This may take a few seconds. If you have not tried the practice exercises, please quit and try the practice assignments first. </p>
+        <p>Be sure to respond to each question. </p>
+        <exercise label="DC-Mesh-Postlab-ex" platform="doenetml">
+  <dynamic>
+    <statement> 
+       <interactive label="DC-Mesh-Postlab" platform="doenetml">
+        <slate surface="doenetml">  
+          <xi:include href="doenet/DC-Mesh-Postlab.doenetml" parse="text"/>
+        </slate>  
+      </interactive> 
+    </statement>
+  </dynamic>
+  <static/>
+</exercise>
+
+    </article>
+</pretext>
